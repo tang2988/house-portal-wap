@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
@@ -24,12 +25,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<header data-am-widget="header"
 				class="am-header am-header-default pet_head_block">
 				<div class="am-header-left am-header-nav ">
-					<a href="#left-link" class="iconfont pet_head_jt_ico">&#xe601;</a>
+					<a href="javascript:history.back()" class="iconfont pet_head_jt_ico">&#xe601;</a>
 				</div>
 
 
 				<div class="am-header-right am-header-nav">
-					<a href="javascript:;" class="iconfont pet_head_gd_ico">&#xe600;</a>
+					<a href="<%=basePath%>/cstcustormer/login" class="iconfont pet_head_gd_ico">&#xe600;</a>
 				</div>
 			</header>
 		</div>
@@ -108,13 +109,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<article data-am-widget="paragraph"
 					class="am-paragraph am-paragraph-default pet_content_article"
 					data-am-paragraph="{ tableScrollable: true, pureview: true }">
-					<h1 class="pet_article_title">让文具更得力 － 学生文具创意图形研究分享</h1>
+					<h1 class="pet_article_title">${andSkuVos.title}</h1>
 					<div class="pet_article_user_time pet_hd_con_time">
 						<i class="iconfont">&#xe617;</i><!-- 2015年10月26日 9:00 ～ 2015年10月28日
-						17:30 -->${andSkuVos.title}
+						17:30 --> <fmt:formatDate value="${andSkuVos.writingTime}" pattern="yyyy/MM/dd  HH:mm:ss" />
 					</div>
 					<div class="pet_article_user_time pet_hd_con_map">
-						<i class="iconfont">&#xe632;</i>北京市海淀区成府路28号 优盛大厦B座8层
+						<i class="iconfont">&#xe632;</i>${andSkuVos.province}${andSkuVos.city}${andSkuVos.area}${andSkuVos.address}
 					</div>
 					<div class="pet_article_user_time pet_hd_con_map">
 						<i class="iconfont">&#xe615;</i>限额：50 人
@@ -122,8 +123,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pet_hd_con_gp">
 						<div class="pet_hd_con_gp_title">坐席购买</div>
 						<div class="pet_hd_con_gp_list">
-							<span><i>￥500</i>标准票</span> <span class="pet_hd_con_gp_list_on"><i>￥700</i>VIP</span>
-							<span><i>￥1300</i>MVP</span>
+							<c:forEach items="${list}" var="sku">
+							<span  ><i>￥${sku.price}</i>${sku.typeOfHouse}</span> 
+							</c:forEach>
+							<!-- <span class="pet_hd_con_gp_list_on"><i>￥700</i>VIP</span>
+							<span><i>￥1300</i>MVP</span> -->
 							<div class="pet_hd_con_gp_list_sm">
 								<i>￥700 VIP</i> -
 								说明：10.26-10.28三天参会资格，10.25-10.27三晚住宿(房型：双人间)，会议期间免费早中晚餐(不含10.28晚餐)，会议期间免费穿梭巴士服务，参会资料，大会精美礼品
@@ -144,13 +148,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pet_hd_con_gp_list_nr">
 						<div class="pet_hd_con_gp_list_nr_title">活动内容</div>
 						<div class="pet_hd_con_gp_list_nr_tag">本次主题</div>
-						<p>2015年10月26日至28日，首届微软 Ignite 技术大会将于北京九华国际会议中心举行。
-							大会将围绕“技术创新助力互联网+时代”的主题，不仅会把美国 Ignite
-							的精彩内容、前瞻技术与创新、行业顶尖技术大牛带到中国，还会把中国本土客户与合作伙伴经典案例和解决方案、科技创新力量、行业大咖搬上中国Ignite的舞台。
-							活动中还精心安排了涵盖几乎微软所有产品线的150多节技术精讲及动手试验室的课程，势必将为参会者提供一场技术与创新的饕餮盛宴！</p>
+						<p>${andSkuVos.content}</p>
 						<div class="pet_hd_con_gp_list_nr_tag">课程主题</div>
-						<p>参与 Microsoft Ignite China
-							微软技术大会，您可零距离聆听十二大精彩课程主题中的一百余场微软最新技术相关的重量级课程，率先体验到微软最新技术及最新解决方案的实践分享。</p>
+						<p>${andSkuVos.subtitle}</p>
 						
 						
 					</div>

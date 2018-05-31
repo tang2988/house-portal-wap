@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xxh.fang.api.ProductApi;
 import com.xxh.fang.entity.CustomerAndProductVo;
 import com.xxh.fang.entity.ProductAndSkuVo;
-import com.xxh.fang.entity.ProductPo;
+import com.xxh.fang.entity.ProductVo;
+import com.xxh.fang.entity.SkuVo;
 
 @Controller
-@RequestMapping("product")
 public class ProductController {
 
 	@Resource
 	ProductApi productApiImpl;
 
-	@RequestMapping("productindex")
+	@RequestMapping(value = { "/" })
 	public String index(Model model) {
 		List<CustomerAndProductVo> customerAndProductPos = productApiImpl.customerAndProductFind();
 
@@ -38,16 +38,19 @@ public class ProductController {
 	public String arealike(Model model, String area) {
 		List<CustomerAndProductVo> list = productApiImpl.findAllAndTheListOf(area);
 		model.addAttribute("list", list);
+		model.addAttribute("area", area);
 		return "cust/liebiao";
 	}
 
 	@RequestMapping("contextPage")
-	public String contextPage(Model model) {
-		ProductAndSkuVo productAndSkuvo = new ProductAndSkuVo();
-		productAndSkuvo.setProduct_id(20L);
-		List<Map<String, Object>> andSkuVos = productApiImpl.findProductId(productAndSkuvo);
-
-		model.addAttribute("andSkuVos", andSkuVos);
+	public String contextPage(Model model, Long productId) {
+		ProductAndSkuVo productAndSkuVo = new ProductAndSkuVo();
+		ProductVo productVo = new ProductVo();
+		productVo.setProduct_id(productId);
+		productAndSkuVo.setProductVo(productVo);
+		ProductAndSkuVo andSkuVos = productApiImpl.findProductAndSku(productAndSkuVo);
+		model.addAttribute("list", andSkuVos.getSkuList());
+		model.addAttribute("andSkuVos", andSkuVos.getProductVo());
 
 		return "cust/ContextPage";
 

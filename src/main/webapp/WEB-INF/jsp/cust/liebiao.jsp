@@ -18,7 +18,7 @@
 <meta name="description" content="" />
 <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css">
 <link rel="stylesheet" href="<%=basePath%>static/css/wap.css?2">
-<title>首页</title>
+<title>${area }</title>
 </head>
 <body>
 	<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
@@ -28,26 +28,36 @@
 	</div>
 
 	<div class="pet_mian" id="top">
+	<div class="pet_head">
+      <header data-am-widget="header" class="am-header am-header-default pet_head_block am-no-layout">
+        <div class="am-header-left am-header-nav ">
+          <a href="javascript:history.back()" class="iconfont pet_head_jt_ico"></a>
+        </div>
+
+        <div class="am-header-right am-header-nav">
+          <a href="javascript:void(0);" onclick="login()" class="iconfont pet_head_gd_ico">登录</a>
+        </div>
+      </header>
+    </div>
 
 
-
-		<div class="pet_circle_nav">
+		<div class="pet_circle_nav" style="padding-top: 80px">
 			<ul class="pet_circle_nav_list">
-				<li><a href="../product/arealike?area=盐田区"
+				<li><a href="<%=basePath%>/arealike?area=盐田区"
 					class="iconfont pet_nav_xinxianshi ">&#xe61e;</a><span>盐田区</span></li>
-				<li><a href="../product/arealike?area=福田区"
+				<li><a href="<%=basePath%>/arealike?area=福田区"
 					class="iconfont pet_nav_zhangzhishi ">&#xe607;</a><span>福田区</span></li>
-				<li><a href="../product/arealike?area=南山区"
+				<li><a href="<%=basePath%>/arealike?area=南山区"
 					class="iconfont pet_nav_kantuya ">&#xe62c;</a><span>南山区</span></li>
-				<li><a href="../product/arealike?area=宝安区"
+				<li><a href="<%=basePath%>/arealike?area=宝安区"
 					class="iconfont pet_nav_mengzhuanti ">&#xe622;</a><span>宝安区</span></li>
-				<li><a href="../product/arealike?area=龙岗区"
+				<li><a href="<%=basePath%>/arealike?area=龙岗区"
 					class="iconfont pet_nav_meirong ">&#xe629;</a><span>龙岗区</span></li>
-				<li><a href="../product/arealike?area=龙华区"
+				<li><a href="<%=basePath%>/arealike?area=龙华区"
 					class="iconfont pet_nav_yiyuan ">&#xe602;</a><span>龙华区</span></li>
-				<li><a href="../product/arealike?area=罗湖区"
+				<li><a href="<%=basePath%>/arealike?area=罗湖区"
 					class="iconfont pet_nav_dianpu ">&#xe604;</a><span>罗湖区</span></li>
-				<li><a href="../product/arealike?area=光明区" class="iconfont pet_nav_gengduo ">&#xe600;</a><span>光明区</span></li>
+				<li><a href="<%=basePath%>/arealike?area=光明区" class="iconfont pet_nav_gengduo ">&#xe600;</a><span>光明区</span></li>
 			</ul>
 			<div class="pet_more_list">
 				<div class="pet_more_list_block">
@@ -114,24 +124,25 @@
 								<div class="pet_list_one_info">
 									<div class="pet_list_one_info_l">
 										<div class="pet_list_one_info_ico">
-											<img src="<%=basePath%>static/img/a1.png" alt="">
+											<img src="${list.headerlconUrl}" alt="">
 										</div>
+										
 										<div class="pet_list_one_info_name">${list.nickName}</div>
 									</div>
 									<div class="pet_list_one_info_r">
-										<div class="pet_list_tag pet_list_tag_xxs">新鲜事</div>
+										<!-- <div class="pet_list_tag pet_list_tag_xxs">新鲜事</div> -->
 									</div>
 								</div>
 								<div class=" am-u-sm-8 am-list-main pet_list_one_nr">
 									<h3 class="am-list-item-hd pet_list_one_bt">
-										<a href="###" class="">${list.title}</a>
+										<a href="contextPage/?productId=${list.product_id}" class="">${list.title}</a>
 									</h3>
 									<div class="am-list-item-text pet_list_one_text">${list.subtitle}</div>
 
 								</div>
 								<div class="am-u-sm-4 am-list-thumb">
 									<a href="###" class=""> <img
-										src="<%=basePath%>static/img/q1.jpg" class="pet_list_one_img"
+										src="${list.masterGraph}" class="pet_list_one_img"
 										alt="" />
 									</a>
 								</div>
@@ -194,6 +205,10 @@
 				$('.pet_more_list').removeClass('pet_more_list_show');
 			});
 		});
+		function login(){
+			
+			window.location.href="<%=basePath%>cstcustormer/login.html"
+		}
 	</script>
 </body>
 </html>

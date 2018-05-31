@@ -15,7 +15,6 @@ import com.xxh.fang.entity.ChangeCustomerStatusVo;
 import com.xxh.fang.entity.ChangeLoginPasswordVo;
 import com.xxh.fang.entity.CstcustormerVo;
 import com.xxh.fang.entity.ModifyUserProfileReqVo;
-import com.xxh.fang.entity.ProductPo;
 import com.xxh.fang.entity.ProductVo;
 import com.xxh.fang.entity.RetrievePasswordVo;
 import com.xxh.fang.entity.UserAuthenticationVo;
@@ -29,6 +28,14 @@ public class CstcustormerController {
 	@Resource
 	ProductApi productApiImpl;
 
+	/**
+	 * 登陆显示页
+	 * @return
+	 */
+	@RequestMapping("login.html")
+	public String loginhtml(){
+		return "cust/login";
+	}
 	/**
 	 * 登陆
 	 * 
@@ -50,6 +57,11 @@ public class CstcustormerController {
 		model.addAttribute("productsize", productvo.size());
 		return "cust/personal";
 	}
+	@RequestMapping("regester.html")
+	public String regesterhtml(){
+		
+		return "cust/regester";
+	}
 
 	/**
 	 * 注册
@@ -65,8 +77,11 @@ public class CstcustormerController {
 		cstcustormervo.setLoginPassword(loginPassword);
 		cstcustormervo.setMobilePhone(mobilePhone);
 		ResVo register = cstcustormerApi.addCstcustormerVo(cstcustormervo);
-		model.addAttribute("register", register);
-		return "success";
+		if(register.getSuccess()){
+			 return login(model, mobilePhone, loginPassword);
+		}
+		return regesterhtml();
+		
 	}
 
 	/**

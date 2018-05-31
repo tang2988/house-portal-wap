@@ -16,7 +16,7 @@
 <meta name="description" content="" />
 <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css">
 <link rel="stylesheet" href="<%=basePath%>static/css/wap.css">
-<title>小萌萌</title>
+<title>个人中心</title>
 </head>
 <body style="background:#ececec">
 	<div class="pet_mian">
@@ -24,11 +24,13 @@
 			<header data-am-widget="header"
 				class="am-header am-header-default pet_head_block">
 				<div class="am-header-left am-header-nav ">
-					<a href="#left-link" class="iconfont pet_head_jt_ico">&#xe601;</a>
+					<a href="javascript:history.back()"
+						class="iconfont pet_head_jt_ico">&#xe601;</a>
 				</div>
-				<div class="pet_news_list_tag_name">小萌萌</div>
+				<div class="pet_news_list_tag_name"></div>
 				<div class="am-header-right am-header-nav">
-					<a href="javascript:;" class="iconfont pet_head_gd_ico">&#xe600;</a>
+					<a href="javascript:void(0);" onclick="login()"
+						class="iconfont pet_head_gd_ico">&#xe600;</a>
 				</div>
 			</header>
 		</div>
@@ -91,7 +93,7 @@
 
 				<div class="pet_grzx_nr">
 					<div class="pet_grzx_ico">
-						<img src="<%=basePath%>static/img/qq1.png" alt="">
+						<img src="${resultone.data.headerIconUrl}" alt="找不到">
 					</div>
 					<div class="pet_grzx_name">${resultone.data.nickName}</div>
 					<div class="pet_grzx_map"></div>
@@ -112,12 +114,14 @@
 										<!--缩略图在标题右边-->
 
 
-										<li
-											class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
+										
+										<li	class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
 
 											<div class=" am-u-sm-8 am-list-main pet_list_one_nr">
 												<h3 class="am-list-item-hd pet_list_one_bt">
-													<a href="###" class=""> ${product.title}</a>
+												<input type="hidden" value="${product}">
+													<a href="<%=basePath%>contextPage/?productId=${product.product_id}"
+														class=""> ${product.title}</a>
 												</h3>
 												<div class="am-list-item-text pet_list_one_text">${product.subtitle}</div>
 
@@ -132,7 +136,7 @@
 
 
 									</ul>
-									 </c:forEach>
+								</c:forEach>
 							</div>
 
 						</div>
@@ -195,6 +199,9 @@
 				$('.pet_more_list').removeClass('pet_more_list_show');
 			});
 		});
+		function login() {
+			window.location.href = "<%=basePath%>cstcustormer/login.html"
+		}
 	</script>
 </body>
 </html>

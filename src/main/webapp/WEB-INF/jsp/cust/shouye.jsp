@@ -30,44 +30,43 @@
 	<div class="pet_mian" id="top">
 		<div data-am-widget="slider" class="am-slider am-slider-a1"
 			data-am-slider='{"directionNav":false}'>
+
 			<ul class="am-slides">
-				<li><img src="<%=basePath%>static/img/fl01.png">
-					<div class="pet_slider_font">
-						<span class="pet_slider_emoji"> (╭￣3￣)╭♡ </span> <span>“大白”有望成为现实：充气机器人研究取得进展</span>
-					</div>
-					<div class="pet_slider_shadow"></div></li>
-				<li><img src="<%=basePath%>static/img/fl02.png">
-					<div class="pet_slider_font">
-						<span class="pet_slider_emoji"> []~(￣▽￣)~* </span> <span>已然魔性的雪橇犬哈士奇
-							—《雪地狂奔》</span>
-					</div>
-					<div class="pet_slider_shadow"></div></li>
-				<li><img src="<%=basePath%>static/img/fl03.png">
-					<div class="pet_slider_font">
-						<span class="pet_slider_emoji"> (｡・`ω´･) </span> <span>《星际争霸2:虚空之遗》国服过审!</span>
-					</div>
-					<div class="pet_slider_shadow"></div></li>
+				<c:forEach items="${customerAndProductPos}" var="shouye" begin="0"
+					end="4">
+
+
+
+
+					<li><img src="${shouye.masterGraph}">
+						<div class="pet_slider_font">
+							<span class="pet_slider_emoji"></span> <span>${shouye.title}</span>
+						</div>
+						<div class="pet_slider_shadow"></div></li>
+				</c:forEach>
+
 			</ul>
 		</div>
 
 
 		<div class="pet_circle_nav">
 			<ul class="pet_circle_nav_list">
-				<li><a href="../product/arealike?area=盐田区"
+				<li><a href="<%=basePath%>arealike?area=盐田区"
 					class="iconfont pet_nav_xinxianshi ">&#xe61e;</a><span>盐田区</span></li>
-				<li><a href="../product/arealike?area=福田区"
+				<li><a href="<%=basePath%>arealike?area=福田区"
 					class="iconfont pet_nav_zhangzhishi ">&#xe607;</a><span>福田区</span></li>
-				<li><a href="../product/arealike?area=南山区"
+				<li><a href="<%=basePath%>arealike?area=南山区"
 					class="iconfont pet_nav_kantuya ">&#xe62c;</a><span>南山区</span></li>
-				<li><a href="../product/arealike?area=宝安区"
+				<li><a href="<%=basePath%>arealike?area=宝安区"
 					class="iconfont pet_nav_mengzhuanti ">&#xe622;</a><span>宝安区</span></li>
-				<li><a href="../product/arealike?area=龙岗区"
+				<li><a href="<%=basePath%>arealike?area=龙岗区"
 					class="iconfont pet_nav_meirong ">&#xe629;</a><span>龙岗区</span></li>
-				<li><a href="../product/arealike?area=龙华区"
+				<li><a href="<%=basePath%>arealike?area=龙华区"
 					class="iconfont pet_nav_yiyuan ">&#xe602;</a><span>龙华区</span></li>
-				<li><a href="../product/arealike?area=罗湖区"
+				<li><a href="<%=basePath%>arealike?area=罗湖区"
 					class="iconfont pet_nav_dianpu ">&#xe604;</a><span>罗湖区</span></li>
-				<li><a href="../product/arealike?area=光明区" class="iconfont pet_nav_gengduo ">&#xe600;</a><span>光明区</span></li>
+				<li><a href="<%=basePath%>arealike?area=光明区"
+					class="iconfont pet_nav_gengduo ">&#xe600;</a><span>光明区</span></li>
 			</ul>
 			<div class="pet_more_list">
 				<div class="pet_more_list_block">
@@ -129,30 +128,28 @@
 					<ul class="am-list">
 						<!--缩略图在标题右边-->
 						<c:forEach items="${customerAndProductPos}" var="cp">
+							
 							<li
 								class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
 								<div class="pet_list_one_info">
 									<div class="pet_list_one_info_l">
 										<div class="pet_list_one_info_ico">
-											<img src="<%=basePath%>static/img/a1.png" alt="">
+											<img src="${cp.headerlconUrl}" alt="">
 										</div>
 										<div class="pet_list_one_info_name">${cp.nickName}</div>
 									</div>
-									<div class="pet_list_one_info_r">
-										<div class="pet_list_tag pet_list_tag_xxs">新鲜事</div>
-									</div>
+									<div class="pet_list_one_info_r"></div>
 								</div>
-								<div class=" am-u-sm-8 am-list-main pet_list_one_nr">
+								<div class=" am-u-sm-8 am-list-main pet_list_one_nr"
+									style="height: 140px;">
 									<h3 class="am-list-item-hd pet_list_one_bt">
-										<a href="###" class="">${cp.title}</a>
+										<a href="contextPage/?productId=${cp.product_id}" class="">${cp.title}</a>
 									</h3>
 									<div class="am-list-item-text pet_list_one_text">${cp.subtitle}</div>
-
 								</div>
 								<div class="am-u-sm-4 am-list-thumb">
-									<a href="###" class=""> <img
-										src="<%=basePath%>static/img/q1.jpg" class="pet_list_one_img"
-										alt="" />
+									<a href="###" class=""> <img src="${cp.masterGraph}"
+										class="pet_list_one_img" alt="" />
 									</a>
 								</div>
 							</li>
@@ -214,6 +211,7 @@
 				$('.pet_more_list').removeClass('pet_more_list_show');
 			});
 		});
-	</script>
+		
+		
 </body>
 </html>
