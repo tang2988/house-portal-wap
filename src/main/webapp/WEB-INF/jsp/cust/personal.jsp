@@ -20,20 +20,7 @@
 </head>
 <body style="background:#ececec">
 	<div class="pet_mian">
-		<div class="pet_head">
-			<header data-am-widget="header"
-				class="am-header am-header-default pet_head_block">
-				<div class="am-header-left am-header-nav ">
-					<a href="javascript:history.back()"
-						class="iconfont pet_head_jt_ico">&#xe601;</a>
-				</div>
-				<div class="pet_news_list_tag_name"></div>
-				<div class="am-header-right am-header-nav">
-					<a href="javascript:void(0);" onclick="login()"
-						class="iconfont pet_head_gd_ico">&#xe600;</a>
-				</div>
-			</header>
-		</div>
+		<%@include file="include.jsp" %>
 
 		<div class="pet_more_list">
 			<div class="pet_more_list_block">

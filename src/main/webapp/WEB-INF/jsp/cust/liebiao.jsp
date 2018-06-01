@@ -28,17 +28,7 @@
 	</div>
 
 	<div class="pet_mian" id="top">
-	<div class="pet_head">
-      <header data-am-widget="header" class="am-header am-header-default pet_head_block am-no-layout">
-        <div class="am-header-left am-header-nav ">
-          <a href="javascript:history.back()" class="iconfont pet_head_jt_ico"></a>
-        </div>
-
-        <div class="am-header-right am-header-nav">
-          <a href="javascript:void(0);" onclick="login()" class="iconfont pet_head_gd_ico">登录</a>
-        </div>
-      </header>
-    </div>
+	<%@include file="include.jsp" %>
 
 
 		<div class="pet_circle_nav" style="padding-top: 80px">
@@ -122,12 +112,14 @@
 							<li
 								class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
 								<div class="pet_list_one_info">
+									<a href="<%=basePath%>/cstcustormer/login">
 									<div class="pet_list_one_info_l">
 										<div class="pet_list_one_info_ico">
-											<img src="${list.headerlconUrl}" alt="">
+											<img src="${list.headerIconUrl}" alt="">
 										</div>
 										
 										<div class="pet_list_one_info_name">${list.nickName}</div>
+									</a>
 									</div>
 									<div class="pet_list_one_info_r">
 										<!-- <div class="pet_list_tag pet_list_tag_xxs">新鲜事</div> -->

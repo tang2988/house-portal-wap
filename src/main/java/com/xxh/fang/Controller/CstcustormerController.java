@@ -3,6 +3,8 @@ package com.xxh.fang.Controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import com.xxh.fang.entity.UserAuthenticationVo;
 
 @Controller
 @RequestMapping("cstcustormer")
+
 public class CstcustormerController {
 
 	@Resource
@@ -30,12 +33,14 @@ public class CstcustormerController {
 
 	/**
 	 * 登陆显示页
+	 * 
 	 * @return
 	 */
 	@RequestMapping("login.html")
-	public String loginhtml(){
+	public String loginhtml() {
 		return "cust/login";
 	}
+
 	/**
 	 * 登陆
 	 * 
@@ -45,21 +50,25 @@ public class CstcustormerController {
 	 * @return
 	 */
 	@RequestMapping("login")
-	public String login(Model model, String mobliephone, String password) {
+
+	public String login(HttpServletRequest request, Model model, String mobliephone, String password) {
 
 		CstcustormerVo cs = new CstcustormerVo();
 		cs.setMobilePhone(mobliephone);
 		cs.setLoginPassword(password);
 		ResVo result = cstcustormerApi.cstCustomerLogin(cs);
+
 		model.addAttribute("resultone", result);
 		List<ProductVo> productvo = productApiImpl.findAll();
 		model.addAttribute("productvo", productvo);
 		model.addAttribute("productsize", productvo.size());
+
 		return "cust/personal";
 	}
+
 	@RequestMapping("regester.html")
-	public String regesterhtml(){
-		
+	public String regesterhtml() {
+
 		return "cust/regester";
 	}
 
@@ -72,16 +81,16 @@ public class CstcustormerController {
 	 * @return
 	 */
 	@RequestMapping("register")
-	public String register(Model model, String mobilePhone, String loginPassword) {
+	public String register(HttpServletRequest request, Model model, String mobilePhone, String loginPassword) {
 		CstcustormerVo cstcustormervo = new CstcustormerVo();
 		cstcustormervo.setLoginPassword(loginPassword);
 		cstcustormervo.setMobilePhone(mobilePhone);
 		ResVo register = cstcustormerApi.addCstcustormerVo(cstcustormervo);
-		if(register.getSuccess()){
-			 return login(model, mobilePhone, loginPassword);
+		if (register.getSuccess()) {
+			return login(request, model, mobilePhone, loginPassword);
 		}
 		return regesterhtml();
-		
+
 	}
 
 	/**

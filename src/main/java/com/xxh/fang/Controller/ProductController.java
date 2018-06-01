@@ -1,7 +1,6 @@
 package com.xxh.fang.Controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -49,6 +48,13 @@ public class ProductController {
 		productVo.setProduct_id(productId);
 		productAndSkuVo.setProductVo(productVo);
 		ProductAndSkuVo andSkuVos = productApiImpl.findProductAndSku(productAndSkuVo);
+		List<SkuVo> kucun = andSkuVos.getSkuList();
+		int kc = 0;
+		
+		for (SkuVo ls : kucun) {
+			kc = ls.getStock();
+		}
+		model.addAttribute("kc", kc);
 		model.addAttribute("list", andSkuVos.getSkuList());
 		model.addAttribute("andSkuVos", andSkuVos.getProductVo());
 

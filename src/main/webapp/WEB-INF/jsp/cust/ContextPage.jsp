@@ -17,25 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="" />
 <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css">
 <link rel="stylesheet" href="<%=basePath%>static/css/wap.css">
+<link href="https://v3.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>活动内容页</title>
 </head>
 <body style="background:#ececec">
 	<div class="pet_mian">
-		<div class="pet_head">
-			<header data-am-widget="header"
-				class="am-header am-header-default pet_head_block">
-				<div class="am-header-left am-header-nav ">
-					<a href="javascript:history.back()" class="iconfont pet_head_jt_ico">&#xe601;</a>
-				</div>
-
-
-				<div class="am-header-right am-header-nav">
-					<a href="<%=basePath%>/cstcustormer/login" class="iconfont pet_head_gd_ico">&#xe600;</a>
-				</div>
-			</header>
-		</div>
-
-
+		<%@include file="include.jsp" %>
 
 		<div class="pet_more_list">
 			<div class="pet_more_list_block">
@@ -104,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="pet_content">
 			<div class="pet_content_block pet_hd_con">
 				<div class="pet_hd_con_head">
-					<img src="<%=basePath%>static/img/z1.jpg" alt="">
+					<img src="<%-- <%=basePath%>static/img/z1.jpg --%>${andSkuVos.masterGraph}" alt="">
 				</div>
 				<article data-am-widget="paragraph"
 					class="am-paragraph am-paragraph-default pet_content_article"
@@ -118,13 +105,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<i class="iconfont">&#xe632;</i>${andSkuVos.province}${andSkuVos.city}${andSkuVos.area}${andSkuVos.address}
 					</div>
 					<div class="pet_article_user_time pet_hd_con_map">
-						<i class="iconfont">&#xe615;</i>限额：50 人
+						<i class="iconfont">&#xe615;</i>总数：${kc} 套
 					</div>
 					<div class="pet_hd_con_gp">
 						<div class="pet_hd_con_gp_title">坐席购买</div>
 						<div class="pet_hd_con_gp_list">
 							<c:forEach items="${list}" var="sku">
-							<span  ><i>￥${sku.price}</i>${sku.typeOfHouse}</span> 
+							<span  ><i>￥${sku.price}万</i>${sku.typeOfHouse}</span> 
 							</c:forEach>
 							<!-- <span class="pet_hd_con_gp_list_on"><i>￥700</i>VIP</span>
 							<span><i>￥1300</i>MVP</span> -->
@@ -159,10 +146,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ul class="like_share_block">
 					<li><a class="link_share_button" href="###"><i
 							class="iconfont share_ico_link">&#xe62f;</i>1460</a></li>
-					<li><a class="link_share_button" href="###"><i
-							class="iconfont share_ico_wx">&#xe630;</i>微信</a></li>
-					<li><a class="link_share_button" href="###"><i
-							class="iconfont share_ico_pyq">&#xe62e;</i>朋友圈</a></li>
+					<li><a class="link_share_button" href="###"><i class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></i>赞</a></li>
+					<li><a class="link_share_button" style="margin-right: 5px;" href="###"><i class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></i>举报</a></li>
 				</ul>
 				<div class="pet_article_dowload">
 					<div class="pet_article_dowload_title">关于Amaze UI</div>
@@ -408,12 +393,12 @@ $(function(){
             }
         });
 
-        $('.pet_head_gd_ico').on('click',function(){
+       /*  $('.pet_head_gd_ico').on('click',function(){
             $('.pet_more_list').addClass('pet_more_list_show');
        });
         $('.pet_more_close').on('click',function(){
             $('.pet_more_list').removeClass('pet_more_list_show');
-        });
+        }); */
 });
 
 </script>
