@@ -3,12 +3,17 @@ package com.xxh.fang.Controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.xxh.fang.Util.ResVo;
+import com.xxh.fang.api.CommentApi;
 import com.xxh.fang.api.ProductApi;
+import com.xxh.fang.entity.CommentVo;
 import com.xxh.fang.entity.CustomerAndProductVo;
 import com.xxh.fang.entity.ProductAndSkuVo;
 import com.xxh.fang.entity.ProductVo;
@@ -20,6 +25,8 @@ public class ProductController {
 	@Resource
 	ProductApi productApiImpl;
 
+	@Resource
+	CommentApi commentApiImpl;
 	@RequestMapping(value = { "/" })
 	public String index(Model model) {
 		List<CustomerAndProductVo> customerAndProductPos = productApiImpl.customerAndProductFind();
@@ -57,7 +64,18 @@ public class ProductController {
 		model.addAttribute("kc", kc);
 		model.addAttribute("list", andSkuVos.getSkuList());
 		model.addAttribute("andSkuVos", andSkuVos.getProductVo());
-
+		
+		List<CommentVo> sentimentHigh = commentApiImpl.sentimentHigh();
+		List<CommentVo> newest = commentApiImpl.newest();
+		List<CommentVo> earliest = commentApiImpl.earliest();
+		
+		model.addAttribute("sentimentHigh", sentimentHigh);
+		model.addAttribute("newest", newest);
+		model.addAttribute("earliest", earliest);
+		
+		 ResVo vo = productApiImpl.modifyreadthenumber(productId);
+		 model.addAttribute("readthenumber", vo.getData());
+		
 		return "cust/ContextPage";
 
 	}

@@ -136,6 +136,7 @@
 										<div class="pet_list_one_info_ico">
 											<img src="${cp.headerIconUrl}" alt="">
 										</div>
+
 										<div class="pet_list_one_info_name">${cp.nickName}</div>
 									</div>
 									<div class="pet_list_one_info_r"></div>

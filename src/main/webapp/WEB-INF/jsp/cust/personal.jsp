@@ -22,6 +22,7 @@
 	<div class="pet_mian">
 		<%@include file="include.jsp" %>
 
+
 		<div class="pet_more_list">
 			<div class="pet_more_list_block">
 				<div class="iconfont pet_more_close">×</div>
@@ -81,10 +82,11 @@
 				<div class="pet_grzx_nr">
 					<div class="pet_grzx_ico">
 						<img src="${resultone.data.headerIconUrl}" alt="找不到">
+						
 					</div>
 					<div class="pet_grzx_name">${resultone.data.nickName}</div>
 					<div class="pet_grzx_map"></div>
-					<div class="pet_grzx_num_font">${resultone.data.describee}</div>
+					<div class="pet_grzx_num_font"><%-- ${resultone.data.describee} --%></div>
 					<div class="pet_grzx_num">
 						<span>653<i>喜欢</i></span> <span>234<i>关注</i></span> <span>${productsize}<i>楼盘</i></span>
 					</div>

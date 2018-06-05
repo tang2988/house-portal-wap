@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 
@@ -17,12 +18,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="" />
 <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css">
 <link rel="stylesheet" href="<%=basePath%>static/css/wap.css">
-<link href="https://v3.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://v3.bootcss.com/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
 <title>活动内容页</title>
 </head>
 <body style="background:#ececec">
 	<div class="pet_mian">
-		<%@include file="include.jsp" %>
+		<%@include file="include.jsp"%>
 
 		<div class="pet_more_list">
 			<div class="pet_more_list_block">
@@ -91,15 +94,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="pet_content">
 			<div class="pet_content_block pet_hd_con">
 				<div class="pet_hd_con_head">
-					<img src="<%-- <%=basePath%>static/img/z1.jpg --%>${andSkuVos.masterGraph}" alt="">
+					<img
+						src="<%-- <%=basePath%>static/img/z1.jpg --%>${andSkuVos.masterGraph}"
+						alt="">
 				</div>
 				<article data-am-widget="paragraph"
 					class="am-paragraph am-paragraph-default pet_content_article"
 					data-am-paragraph="{ tableScrollable: true, pureview: true }">
 					<h1 class="pet_article_title">${andSkuVos.title}</h1>
 					<div class="pet_article_user_time pet_hd_con_time">
-						<i class="iconfont">&#xe617;</i><!-- 2015年10月26日 9:00 ～ 2015年10月28日
-						17:30 --> <fmt:formatDate value="${andSkuVos.writingTime}" pattern="yyyy/MM/dd  HH:mm:ss" />
+						<i class="iconfont">&#xe617;</i>
+						<!-- 2015年10月26日 9:00 ～ 2015年10月28日
+						17:30 -->
+						<fmt:formatDate value="${andSkuVos.writingTime}"
+							pattern="yyyy/MM/dd  HH:mm:ss" />
 					</div>
 					<div class="pet_article_user_time pet_hd_con_map">
 						<i class="iconfont">&#xe632;</i>${andSkuVos.province}${andSkuVos.city}${andSkuVos.area}${andSkuVos.address}
@@ -111,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pet_hd_con_gp_title">坐席购买</div>
 						<div class="pet_hd_con_gp_list">
 							<c:forEach items="${list}" var="sku">
-							<span  ><i>￥${sku.price}万</i>${sku.typeOfHouse}</span> 
+								<span><i>￥${sku.price}万</i>${sku.typeOfHouse}</span>
 							</c:forEach>
 							<!-- <span class="pet_hd_con_gp_list_on"><i>￥700</i>VIP</span>
 							<span><i>￥1300</i>MVP</span> -->
@@ -138,16 +146,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p>${andSkuVos.content}</p>
 						<div class="pet_hd_con_gp_list_nr_tag">课程主题</div>
 						<p>${andSkuVos.subtitle}</p>
-						
-						
+
+
 					</div>
 
 				</article>
 				<ul class="like_share_block">
 					<li><a class="link_share_button" href="###"><i
-							class="iconfont share_ico_link">&#xe62f;</i>1460</a></li>
-					<li><a class="link_share_button" href="###"><i class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></i>赞</a></li>
-					<li><a class="link_share_button" style="margin-right: 5px;" href="###"><i class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></i>举报</a></li>
+							class="iconfont share_ico_link">&#xe62f;</i>${readthenumber.readthenumber}</a></li>
+					<li><a class="link_share_button" href="javascript:void(0)"
+						id="addgive"><i class="glyphicon glyphicon-thumbs-up"
+							aria-hidden="true"><input type="hidden" id="productid"
+								value="${andSkuVos.product_id}" /><input type="hidden"
+								value="10" id="status" /></i>赞</a></li>
+					<li><a class="link_share_button" style="margin-right: 5px;"
+						href="javascript:void(0)" id="addgivereport"><i
+							class="glyphicon glyphicon-thumbs-down" aria-hidden="true"><input
+								type="hidden" id="productid" value="${andSkuVos.product_id}" /><input
+								type="hidden" value="20" id="status" /></i>举报</a></li>
 				</ul>
 				<div class="pet_article_dowload">
 					<div class="pet_article_dowload_title">关于Amaze UI</div>
@@ -177,230 +193,247 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li class=""><a href="[data-tab-panel-1]">最新</a></li>
 							<li class=""><a href="[data-tab-panel-2]">最早</a></li>
 						</ul>
-						<div class="am-tabs-bd pet_pl_list">
-							<div data-tab-panel-0 class="am-tab-panel am-active">
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a1.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Amaze</div>
-										<div class="pet_comment_list_block_r_text">那时候有多好，任雨打湿裙角。忍不住哼起，心爱的旋律。绿油油的树叶，自由地在说笑。燕子忙归巢，风铃在舞蹈。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">10分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
+						<div class="am-tabs-bd pet_pl_list"
+							style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+
+							<div data-tab-panel-0="" class="am-tab-panel am-active">
+								<c:forEach items="${sentimentHigh}" var="sentimentHigh">
+									<div class="pet_comment_list_block">
+										<div class="pet_comment_list_block_l">
+											<img src="<%=basePath%>static/img/a1.png" alt="">
+										</div>
+										<div class="pet_comment_list_block_r">
+											<div class="pet_comment_list_block_r_info">${sentimentHigh.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_text">${sentimentHigh.content}</div>
+											<div class="pet_comment_list_block_r_bottom">
+												<div class="pet_comment_list_bottom_info_l">
+													<fmt:formatDate value="${sentimentHigh.commentOfTime}"
+														pattern="yyyy年MM月dd日HH点mm分ss秒" />
+												</div>
+												<div class="pet_comment_list_bottom_info_r">
+													<input type="hidden" value="${sentimentHigh.commentOnID}"
+														name="commentOn" id="commentOn"> <a
+														href="javascript:void(0)" id="ahre"><span><i
+															class="iconfont"></i>${sentimentHigh.pointOfpraise} </span></a> <span
+														class="replyArcticle"> 回复</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a2.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">一如既往</div>
-										<div class="pet_comment_list_block_r_text">
-											<span>@Drary</span>没有老友你的陪伴，日子真是漫长与你重逢之时，我会敞开心扉倾诉所有。
-										</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">15分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a3.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">AllThe</div>
-										<div class="pet_comment_list_block_r_text">表紙の裏に移らないよに
-											あけた一枚目のページの裏に透けた文字めくろうとして 指がとまって</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">30分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a4.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Drary</div>
-										<div class="pet_comment_list_block_r_text">无论历经怎样的艰难坎坷，总有你相伴陪我度过。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">1小时前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
+								</c:forEach>
+
 							</div>
-							<div data-tab-panel-1 class="am-tab-panel ">
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a2.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">一如既往</div>
-										<div class="pet_comment_list_block_r_text">
-											<span>@Drary</span>没有老友你的陪伴，日子真是漫长与你重逢之时，我会敞开心扉倾诉所有。
-										</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">15分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a3.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">AllThe</div>
-										<div class="pet_comment_list_block_r_text">表紙の裏に移らないよに
-											あけた一枚目のページの裏に透けた文字めくろうとして 指がとまって</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">30分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a1.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Amaze</div>
-										<div class="pet_comment_list_block_r_text">那时候有多好，任雨打湿裙角。忍不住哼起，心爱的旋律。绿油油的树叶，自由地在说笑。燕子忙归巢，风铃在舞蹈。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">10分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
 
-
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a4.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Drary</div>
-										<div class="pet_comment_list_block_r_text">无论历经怎样的艰难坎坷，总有你相伴陪我度过。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">1小时前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
+							<div data-tab-panel-1="" class="am-tab-panel ">
+								<c:forEach items="${newest}" var="newest">
+									<div class="pet_comment_list_block">
+										<div class="pet_comment_list_block_l">
+											<img src="<%=basePath%>static/img/a2.png" alt="">
+										</div>
+										<div class="pet_comment_list_block_r">
+											<div class="pet_comment_list_block_r_info">${newest.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_text">
+												<span> <!-- @Drary -->
+												</span>${newest.content }
+											</div>
+											<div class="pet_comment_list_block_r_bottom">
+												<div class="pet_comment_list_bottom_info_l">
+													<fmt:formatDate value="${newest.commentOfTime}"
+														pattern="yyyy年MM月dd日HH点mm分ss秒" />
+												</div>
+												<div class="pet_comment_list_bottom_info_r">
+													<span><i class="iconfont"></i>${newest.pointOfpraise}
+													</span> <span> 回复</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</c:forEach>
 							</div>
-							<div data-tab-panel-2 class="am-tab-panel ">
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a1.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Amaze</div>
-										<div class="pet_comment_list_block_r_text">那时候有多好，任雨打湿裙角。忍不住哼起，心爱的旋律。绿油油的树叶，自由地在说笑。燕子忙归巢，风铃在舞蹈。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">10分钟前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
+
+							<div data-tab-panel-2="" class="am-tab-panel ">
+								<c:forEach items="${earliest}" var="earliest">
+									<div class="pet_comment_list_block">
+										<div class="pet_comment_list_block_l">
+											<img src="<%=basePath%>static/img/a1.png" alt="">
+										</div>
+										<div class="pet_comment_list_block_r">
+											<div class="pet_comment_list_block_r_info">${earliest.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_text">
+												${earliest.content}</div>
+											<div class="pet_comment_list_block_r_bottom">
+												<div class="pet_comment_list_bottom_info_l">
+													<fmt:formatDate value="${earliest.commentOfTime}"
+														pattern="yyyy年MM月dd日HH点mm分ss秒" />
+												</div>
+												<div class="pet_comment_list_bottom_info_r">
+													<input type="hidden" value="${earliest.commentOnID}" /> <span><i
+														class="iconfont"></i>${earliest.pointOfpraise} </span> <span>
+														回复</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</c:forEach>
 
-
-								<div class="pet_comment_list_block">
-									<div class="pet_comment_list_block_l">
-										<img src="<%=basePath%>static/img/a4.png" alt="">
-									</div>
-									<div class="pet_comment_list_block_r">
-										<div class="pet_comment_list_block_r_info">Drary</div>
-										<div class="pet_comment_list_block_r_text">无论历经怎样的艰难坎坷，总有你相伴陪我度过。</div>
-										<div class="pet_comment_list_block_r_bottom">
-											<div class="pet_comment_list_bottom_info_l">1小时前</div>
-											<div class="pet_comment_list_bottom_info_r">
-												<span><i class="iconfont">&#xe631;</i>5 </span> <span>
-													回复</span>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
+
+
 					</div>
-
-
-
-
 				</div>
 			</div>
 
-			<div class="pet_article_footer_info">Copyright(c)2015 Amaze UI
-				All Rights Reserved</div>
+
+
+
 		</div>
+	</div>
+
+
+	<div id="replyArcticle"
+		style="display: none; width:120px; float:right;margin-right:40%; background:#0066FF;">
+		<form id="replyArcticle_form">
+			<label for="replyArcticle_text">添加评论</label>
+			<textarea rows="" cols="" name="replyArcticle_text"></textarea>
+			<input type="button" id="tijiao" value="ok" <!-- onclick="tijiao" -->>
+		</form>
+	</div>
+
+	<div class="pet_article_footer_info">Copyright(c)2015 Amaze UI
+		All Rights Reserved</div>
+	</div>
 	</div>
 	<script src="<%=basePath%>static/js/jquery.min.js"></script>
 	<script src="<%=basePath%>static/js/amazeui.min.js"></script>
 	<script>
-$(function(){
-
-    // 动态计算新闻列表文字样式
-    auto_resize();
-    $(window).resize(function() {
-        auto_resize();
-    });
-    $('.am-list-thumb img').load(function(){
-        auto_resize();
-    });
-    $('.pet_article_like li:last-child').css('border','none');
-        function auto_resize(){
-        $('.pet_list_one_nr').height($('.pet_list_one_img').height());
-                // alert($('.pet_list_one_nr').height());
-    }
-        $('.pet_article_user').on('click',function(){
-            if($('.pet_article_user_info_tab').hasClass('pet_article_user_info_tab_show')){
-                $('.pet_article_user_info_tab').removeClass('pet_article_user_info_tab_show').addClass('pet_article_user_info_tab_cloes');
-            }else{
-                $('.pet_article_user_info_tab').removeClass('pet_article_user_info_tab_cloes').addClass('pet_article_user_info_tab_show');
-            }
-        });
-
-       /*  $('.pet_head_gd_ico').on('click',function(){
-            $('.pet_more_list').addClass('pet_more_list_show');
-       });
-        $('.pet_more_close').on('click',function(){
-            $('.pet_more_list').removeClass('pet_more_list_show');
-        }); */
-});
-
-</script>
+		$(function() {
+	
+			// 动态计算新闻列表文字样式
+			auto_resize();
+			$(window).resize(function() {
+				auto_resize();
+			});
+			$('.am-list-thumb img').load(function() {
+				auto_resize();
+			});
+			$('.pet_article_like li:last-child').css('border', 'none');
+			function auto_resize() {
+				$('.pet_list_one_nr').height($('.pet_list_one_img').height());
+			// alert($('.pet_list_one_nr').height());
+			}
+			$('.pet_article_user').on('click', function() {
+				if ($('.pet_article_user_info_tab').hasClass('pet_article_user_info_tab_show')) {
+					$('.pet_article_user_info_tab').removeClass('pet_article_user_info_tab_show').addClass('pet_article_user_info_tab_cloes');
+				} else {
+					$('.pet_article_user_info_tab').removeClass('pet_article_user_info_tab_cloes').addClass('pet_article_user_info_tab_show');
+				}
+			});
+	
+		/*  $('.pet_head_gd_ico').on('click',function(){
+		     $('.pet_more_list').addClass('pet_more_list_show');
+		});
+		 $('.pet_more_close').on('click',function(){
+		     $('.pet_more_list').removeClass('pet_more_list_show');
+		 }); */
+		});
+	
+		$(function() {
+	
+			$("[id=ahre]").click(function() {
+	
+				var commentOnID = $("#commentOn").val();
+				alert(commentOnID);
+	
+				$.ajax({
+					type : "post",
+					url : "<%=basePath%>comment/pointOfpraise",
+					dataType : "json",
+					async : true,
+					data : {
+						"commentOnID" : commentOnID
+					},
+					success : function(data) {
+						alert(data);
+						console.log(data)
+						$("#ahre").html(data);
+					}
+				});
+	
+	
+			});
+	
+	
+			//点赞
+			$(function() {
+				var productid = $("#productid").val();
+				$("[id=addgive]").click(function() {
+	
+					$.ajax({
+						type : "post",
+						url : "<%=basePath%>comment/give",
+						dataType : "json",
+						async : true,
+						data : {
+							"productid" : productid,
+							"status" : 10
+						},
+						success : function(data) {}
+					});
+				})
+	
+			});
+			//举报
+			$(function() {
+				var productid = $("#productid").val();
+				$("[id=addgivereport]").click(function() {
+					/* var status = $("[id=status]").val();
+					alert(status); */
+					$.ajax({
+						type : "post",
+						url : "<%=basePath%>comment/giveToreport",
+						dataType : "json",
+						async : true,
+						data : {
+							"productid" : productid,
+							"status" : 20
+						},
+						success : function(data) {}
+					});
+				});
+	
+			});
+	
+	
+			$(".replyArcticle").click(function() {
+				$("#replyArcticle").show()
+			});
+	
+		});
+		
+		$(function(){
+			$("#tijiao").click(function(){
+				var content = $("textarea[name='replyArcticle_text']").val();
+				var productid = $("#productid").val();
+				$.ajax({
+					type : "post",
+					url : "<%=basePath%>comment/add.do",
+					dataType : "json",
+					async : true,
+					data : {
+						"productid" : productid,
+						"content" : content,
+						
+					},
+					success : function(data) {}
+				});
+				
+			});
+			
+			
+		});
+			
+		
+	</script>
 </body>
 </html>

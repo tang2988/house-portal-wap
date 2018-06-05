@@ -15,6 +15,7 @@ import com.xxh.fang.api.CstcustormerApi;
 import com.xxh.fang.api.ProductApi;
 import com.xxh.fang.entity.ChangeCustomerStatusVo;
 import com.xxh.fang.entity.ChangeLoginPasswordVo;
+import com.xxh.fang.entity.CstcustormerPo;
 import com.xxh.fang.entity.CstcustormerVo;
 import com.xxh.fang.entity.ModifyUserProfileReqVo;
 import com.xxh.fang.entity.ProductVo;
@@ -37,7 +38,17 @@ public class CstcustormerController {
 	 * @return
 	 */
 	@RequestMapping("login.html")
-	public String loginhtml() {
+	public String loginhtml(HttpServletRequest request, Model model, String mobliephone, String password,HttpSession httpSession) {
+		CstcustormerPo  cstcustormervo = (CstcustormerPo) httpSession.getAttribute("sessionlogin");
+		if(cstcustormervo!=null){
+			return login(request, model, cstcustormervo.getMobilePhone(), cstcustormervo.getLoginPassword());
+		}
+		return "cust/login";
+	}
+	
+	@RequestMapping("login.do")
+	public String logindo() {
+		
 		return "cust/login";
 	}
 
@@ -57,7 +68,8 @@ public class CstcustormerController {
 		cs.setMobilePhone(mobliephone);
 		cs.setLoginPassword(password);
 		ResVo result = cstcustormerApi.cstCustomerLogin(cs);
-
+		HttpSession session = request.getSession();
+		session.setAttribute("sessionlogin", result.getData());
 		model.addAttribute("resultone", result);
 		List<ProductVo> productvo = productApiImpl.findAll();
 		model.addAttribute("productvo", productvo);

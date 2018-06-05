@@ -23,9 +23,9 @@
 			</div>
 
 			<div class="am-header-right am-header-nav">
-				<a href="<%=basePath%>cstcustormer/login.do"><span class="glyphicon glyphicon-user" aria-hidden="true"
+				<a href="<%=basePath%>cstcustormer/login.html"><span class="glyphicon glyphicon-user" aria-hidden="true"
 					style="font-size: 22px"></span></a>
-				<!-- <a href="javascript:void(0);" onclick="login()" class="iconfont pet_head_gd_ico">登录</a> -->
+				
 			</div>
 		</header>
 	</div>
