@@ -18,7 +18,7 @@
 			<div class="am-header-left am-header-nav ">
 
 				
-					<a href="javascript:history.back()"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"
+					<a href="<%=basePath%>"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"
 						style="font-size: 22px";></span></a>
 			</div>
 

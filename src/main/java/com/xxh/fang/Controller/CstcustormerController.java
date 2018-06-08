@@ -1,6 +1,7 @@
 package com.xxh.fang.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xxh.fang.Util.ResVo;
+import com.xxh.fang.api.CommentApi;
 import com.xxh.fang.api.CstcustormerApi;
+import com.xxh.fang.api.GivealikeApi;
 import com.xxh.fang.api.ProductApi;
 import com.xxh.fang.entity.ChangeCustomerStatusVo;
 import com.xxh.fang.entity.ChangeLoginPasswordVo;
@@ -31,6 +34,12 @@ public class CstcustormerController {
 	CstcustormerApi cstcustormerApi;
 	@Resource
 	ProductApi productApiImpl;
+	
+	@Resource
+	GivealikeApi givealikeApiImpl;
+	
+	@Resource
+	CommentApi commentApiImpl;
 
 	/**
 	 * 登陆显示页
@@ -71,10 +80,13 @@ public class CstcustormerController {
 		HttpSession session = request.getSession();
 		session.setAttribute("sessionlogin", result.getData());
 		model.addAttribute("resultone", result);
-		List<ProductVo> productvo = productApiImpl.findAll();
-		model.addAttribute("productvo", productvo);
-		model.addAttribute("productsize", productvo.size());
+		ResVo productvo = productApiImpl.findAll(1010000023811L);
+		model.addAttribute("productvo", productvo.getData());
 
+		Map<String, Object> findlike = givealikeApiImpl.findlike(1010000023811L);
+		 Map<String, Object> focusOn = commentApiImpl.FocusOn(1010000023811L);
+		model.addAttribute("findlike", findlike);
+		model.addAttribute("focusOn", focusOn);
 		return "cust/personal";
 	}
 

@@ -1,6 +1,5 @@
 package com.xxh.fang.Controller;
 
-import java.io.IOException;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -10,12 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.xxh.fang.Util.ResVo;
 import com.xxh.fang.api.CommentApi;
 import com.xxh.fang.entity.CommentVo;
 import com.xxh.fang.entity.CstcustormerPo;
-import com.xxh.fang.entity.CstcustormerVo;
 import com.xxh.fang.entity.GivealikeVo;
 
 @Controller
@@ -31,7 +29,7 @@ public class CommentController {
 		CstcustormerPo sessionlogin = (CstcustormerPo) rq.getSession().getAttribute("sessionlogin");
 
 		if (sessionlogin == null) {
-
+			return "UNLOGIN";
 		}
 
 		GivealikeVo givealikeVo = new GivealikeVo();
@@ -39,8 +37,8 @@ public class CommentController {
 		givealikeVo.setPointOfTime(new Date());
 		givealikeVo.setProduct_id(productid);
 		givealikeVo.setStatus(status);
-		commentApiImpl.addGivealike(givealikeVo);
-		return "赞成功";
+		 ResVo resvo = commentApiImpl.addGivealike(givealikeVo);
+		return resvo.getMsg();
 
 	}
 
@@ -51,7 +49,7 @@ public class CommentController {
 		CstcustormerPo sessionlogin = (CstcustormerPo) rq.getSession().getAttribute("sessionlogin");
 
 		if (sessionlogin == null) {
-
+			return "UNLOGIN";
 		}
 
 		GivealikeVo givealikeVo = new GivealikeVo();
@@ -59,39 +57,47 @@ public class CommentController {
 		givealikeVo.setPointOfTime(new Date());
 		givealikeVo.setProduct_id(productid);
 		givealikeVo.setStatus(status);
-		commentApiImpl.addGivealike(givealikeVo);
-		return "举报成功";
+		 ResVo resvo = commentApiImpl.addGivealike(givealikeVo);
+		return resvo.getMsg();
 
 	}
 
 	@RequestMapping("pointOfpraise")
 	@ResponseBody
 
-	public String pointOfpraise(Long commentOnID) {
+	public ResVo pointOfpraise(Long commentOnID) {
 
 		CommentVo commentVo = new CommentVo();
 		commentVo.setCommentOnID(commentOnID);
-		commentApiImpl.updatePointOfpraise(commentVo);
-		return "true";
+		 ResVo resvo = commentApiImpl.updatePointOfpraise(commentVo);
+		return resvo;
 	}
 
-	@RequestMapping("add.do")
+	@RequestMapping( value = "add")
+	@ResponseBody
 	public String adddo(HttpServletRequest rq, Long productid, String content) {
 
 		CstcustormerPo sessionlogin = (CstcustormerPo) rq.getSession().getAttribute("sessionlogin");
 
 		if (sessionlogin == null) {
-
+			return "UNLOGIN";
 		}
 		CommentVo commentVo = new CommentVo();
 		commentVo.setContent(content);
 		commentVo.setCommentOfTime(new Date());
 		commentVo.setProduct_id(productid);
-		commentVo.setCommentOnPeople(sessionlogin.getNickName());
+		commentVo.setCustomerId(sessionlogin.getCustomerId());
 		commentVo.setPointOfpraise(0L);
-		commentVo.setRepostId(0L);
-		commentApiImpl.addComment(commentVo);
-		return "添加成功";
+
+		ResVo vo = commentApiImpl.addComment(commentVo);
+
+		return vo.getMsg();
+	}
+
+	@RequestMapping("login.html")
+	public String loginHtml() {
+		return "cust/login";
+
 	}
 
 }

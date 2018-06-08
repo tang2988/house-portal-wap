@@ -200,10 +200,10 @@
 								<c:forEach items="${sentimentHigh}" var="sentimentHigh">
 									<div class="pet_comment_list_block">
 										<div class="pet_comment_list_block_l">
-											<img src="<%=basePath%>static/img/a1.png" alt="">
+											<img src="${sentimentHigh.headerIconUrl}" alt="">
 										</div>
 										<div class="pet_comment_list_block_r">
-											<div class="pet_comment_list_block_r_info">${sentimentHigh.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_info">${sentimentHigh.nickName}</div>
 											<div class="pet_comment_list_block_r_text">${sentimentHigh.content}</div>
 											<div class="pet_comment_list_block_r_bottom">
 												<div class="pet_comment_list_bottom_info_l">
@@ -212,10 +212,11 @@
 												</div>
 												<div class="pet_comment_list_bottom_info_r">
 													<input type="hidden" value="${sentimentHigh.commentOnID}"
-														name="commentOn" id="commentOn"> <a
-														href="javascript:void(0)" id="ahre"><span><i
-															class="iconfont"></i>${sentimentHigh.pointOfpraise} </span></a> <span
-														class="replyArcticle"> 回复</span>
+														name="commentOn"> <a
+														href="javascript:commentPrise(${sentimentHigh.commentOnID})"
+														name="ahre"><span><i class="iconfont"></i></span><span
+														id="pointOfpraise${sentimentHigh.commentOnID}">${sentimentHigh.pointOfpraise}<span></span></a>
+													<span class="replyArcticle"> 回复</span>
 												</div>
 											</div>
 										</div>
@@ -228,10 +229,10 @@
 								<c:forEach items="${newest}" var="newest">
 									<div class="pet_comment_list_block">
 										<div class="pet_comment_list_block_l">
-											<img src="<%=basePath%>static/img/a2.png" alt="">
+											<img src="${newest.headerIconUrl}" alt="">
 										</div>
 										<div class="pet_comment_list_block_r">
-											<div class="pet_comment_list_block_r_info">${newest.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_info">${newest.nickName}</div>
 											<div class="pet_comment_list_block_r_text">
 												<span> <!-- @Drary -->
 												</span>${newest.content }
@@ -242,8 +243,12 @@
 														pattern="yyyy年MM月dd日HH点mm分ss秒" />
 												</div>
 												<div class="pet_comment_list_bottom_info_r">
-													<span><i class="iconfont"></i>${newest.pointOfpraise}
-													</span> <span> 回复</span>
+													<input type="hidden" value="${newest.commentOnID}"
+														name="commentOn"> <a
+														href="javascript:commentPrise(${newest.commentOnID})"
+														name="ahre"><span><i class="iconfont"></i></span><span
+														id="pointOfpraise${newest.commentOnID}">${newest.pointOfpraise}<span></span></a>
+													<span class="replyArcticle"> 回复</span>
 												</div>
 											</div>
 										</div>
@@ -255,10 +260,10 @@
 								<c:forEach items="${earliest}" var="earliest">
 									<div class="pet_comment_list_block">
 										<div class="pet_comment_list_block_l">
-											<img src="<%=basePath%>static/img/a1.png" alt="">
+											<img src="${earliest.headerIconUrl}" alt="">
 										</div>
 										<div class="pet_comment_list_block_r">
-											<div class="pet_comment_list_block_r_info">${earliest.commentOnPeople}</div>
+											<div class="pet_comment_list_block_r_info">${earliest.nickName}</div>
 											<div class="pet_comment_list_block_r_text">
 												${earliest.content}</div>
 											<div class="pet_comment_list_block_r_bottom">
@@ -267,9 +272,12 @@
 														pattern="yyyy年MM月dd日HH点mm分ss秒" />
 												</div>
 												<div class="pet_comment_list_bottom_info_r">
-													<input type="hidden" value="${earliest.commentOnID}" /> <span><i
-														class="iconfont"></i>${earliest.pointOfpraise} </span> <span>
-														回复</span>
+													<input type="hidden" value="${earliest.commentOnID}"
+														name="commentOn"><a
+														href="javascript:commentPrise(${earliest.commentOnID})"
+														name="ahre"><span><i class="iconfont"></span></i><span
+														id="pointOfpraise${earliest.commentOnID}">${earliest.pointOfpraise}<span></a>
+													<span> 评论</span>
 												</div>
 											</div>
 										</div>
@@ -296,7 +304,9 @@
 		<form id="replyArcticle_form">
 			<label for="replyArcticle_text">添加评论</label>
 			<textarea rows="" cols="" name="replyArcticle_text"></textarea>
-			<input type="button" id="tijiao" value="ok" <!-- onclick="tijiao" -->>
+			<input type="button" id="tijiao" value="ok"
+			<!-- onclick="tijiao" -->
+			>
 		</form>
 	</div>
 
@@ -338,47 +348,53 @@
 		 }); */
 		});
 	
-		$(function() {
-	
-			$("[id=ahre]").click(function() {
-	
-				var commentOnID = $("#commentOn").val();
-				alert(commentOnID);
-	
+		
+		function commentPrise(commentOnID){
 				$.ajax({
 					type : "post",
 					url : "<%=basePath%>comment/pointOfpraise",
-					dataType : "json",
+					
 					async : true,
 					data : {
 						"commentOnID" : commentOnID
 					},
 					success : function(data) {
-						alert(data);
-						console.log(data)
-						$("#ahre").html(data);
+						$("#pointOfpraise"+commentOnID).html(data.data.pointOfpraise);
+						
+						console.info(data)
 					}
 				});
 	
-	
-			});
+		}
+		$(function() {
 	
 	
 			//点赞
 			$(function() {
 				var productid = $("#productid").val();
+	
 				$("[id=addgive]").click(function() {
 	
 					$.ajax({
 						type : "post",
 						url : "<%=basePath%>comment/give",
-						dataType : "json",
+	
 						async : true,
 						data : {
 							"productid" : productid,
 							"status" : 10
 						},
-						success : function(data) {}
+						success : function(data) {
+							if ("UNLOGIN" == data) {
+								window.location.href = "<%=basePath%>/cstcustormer/login.html";
+							} else {
+								alert(data);
+							}
+	
+	
+	
+	
+						}
 					});
 				})
 	
@@ -387,18 +403,24 @@
 			$(function() {
 				var productid = $("#productid").val();
 				$("[id=addgivereport]").click(function() {
-					/* var status = $("[id=status]").val();
-					alert(status); */
+	
 					$.ajax({
 						type : "post",
 						url : "<%=basePath%>comment/giveToreport",
-						dataType : "json",
 						async : true,
 						data : {
 							"productid" : productid,
 							"status" : 20
 						},
-						success : function(data) {}
+						success : function(data) {
+							if ("UNLOGIN" == data) {
+								window.location.href = "<%=basePath%>/cstcustormer/login.html";
+							} else {
+								alert("举报成功");
+							}
+	
+	
+						}
 					});
 				});
 	
@@ -410,30 +432,35 @@
 			});
 	
 		});
-		
-		$(function(){
-			$("#tijiao").click(function(){
+	
+		$(function() {
+			$("#tijiao").click(function() {
 				var content = $("textarea[name='replyArcticle_text']").val();
+	
 				var productid = $("#productid").val();
 				$.ajax({
 					type : "post",
-					url : "<%=basePath%>comment/add.do",
-					dataType : "json",
+					url : "<%=basePath%>comment/add",
+	
 					async : true,
 					data : {
 						"productid" : productid,
 						"content" : content,
-						
 					},
-					success : function(data) {}
+					success : function(data) {
+						if ("UNLOGIN" == data) {
+							window.location.href = "<%=basePath%>/cstcustormer/login.html";
+						} else {
+							alert(data);
+							window.location.reload();
+						}
+					}
 				});
-				
+	
 			});
-			
-			
+	
+	
 		});
-			
-		
 	</script>
 </body>
 </html>

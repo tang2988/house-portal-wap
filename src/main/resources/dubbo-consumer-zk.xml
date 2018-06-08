@@ -14,4 +14,7 @@
 	<dubbo:reference id="productApiImpl" interface="com.xxh.fang.api.ProductApi" />
 	
 	<dubbo:reference  id="commentApiImpl" interface="com.xxh.fang.api.CommentApi"></dubbo:reference>
+	
+	<dubbo:reference id="givealikeApiImpl" interface="com.xxh.fang.api.GivealikeApi"></dubbo:reference>
+	
 </beans>

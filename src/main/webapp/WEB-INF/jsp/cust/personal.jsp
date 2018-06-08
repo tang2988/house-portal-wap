@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -20,7 +21,7 @@
 </head>
 <body style="background:#ececec">
 	<div class="pet_mian">
-		<%@include file="include.jsp" %>
+		<%@include file="include.jsp"%>
 
 
 		<div class="pet_more_list">
@@ -82,13 +83,19 @@
 				<div class="pet_grzx_nr">
 					<div class="pet_grzx_ico">
 						<img src="${resultone.data.headerIconUrl}" alt="找不到">
-						
+
 					</div>
+					<input type="hidden" value="${resultone.data.customerId}"
+						id="customerId" name="customerId" />
 					<div class="pet_grzx_name">${resultone.data.nickName}</div>
+						<div class="pet_grzx_name"><a href="<%=basePath%>add.html"/>发帖</a></div>
 					<div class="pet_grzx_map"></div>
-					<div class="pet_grzx_num_font"><%-- ${resultone.data.describee} --%></div>
+					<div class="pet_grzx_num_font">
+						<%-- ${resultone.data.describee} --%>
+					</div>
 					<div class="pet_grzx_num">
-						<span>653<i>喜欢</i></span> <span>234<i>关注</i></span> <span>${productsize}<i>楼盘</i></span>
+						<span>${findlike.count}<i>喜欢</i></span> <span>${focusOn.count}<i>回复</i></span>
+						<span>${fn:length(productvo)}<i>楼盘</i></span>
 					</div>
 
 				</div>
@@ -103,13 +110,14 @@
 										<!--缩略图在标题右边-->
 
 
-										
-										<li	class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
+
+										<li
+											class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
 
 											<div class=" am-u-sm-8 am-list-main pet_list_one_nr">
 												<h3 class="am-list-item-hd pet_list_one_bt">
-												<input type="hidden" value="${product}">
-													<a href="<%=basePath%>contextPage/?productId=${product.product_id}"
+													<input type="hidden" value="${product}"> <a
+														href="<%=basePath%>contextPage/?productId=${product.product_id}"
 														class=""> ${product.title}</a>
 												</h3>
 												<div class="am-list-item-text pet_list_one_text">${product.subtitle}</div>
