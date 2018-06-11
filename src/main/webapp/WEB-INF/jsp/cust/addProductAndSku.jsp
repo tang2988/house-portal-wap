@@ -24,61 +24,61 @@
 </head>
 
 <body>
+
 	<table align="center">
-
 		<tr>
-
+			<form method="post" action="<%=basePath%>add.do" id="form1">
 			<td><table>
-					<form method="post" action="" id="form1">
-						<tr>
-							<td>标题<input type="text" name="title" /></td>
+
+					<tr>
+						<td>标题<input type="text" name="title" /></td>
 
 
-						</tr>
-						<tr>
-							<td>副标题<input type="text" name="subtitle" /></td>
-						</tr>
-						<tr>
-							<td>内容<input type="text" name="content" /></td>
-						</tr>
-						<tr>
-							<td>主图<input type="text" name="masterGraph" /></td>
-						</tr>
-						<tr>
-							<td>省<input type="text" name="province" /></td>
-						</tr>
-						<tr>
-							<td>城市<input type="text" name="city" /></td>
-						</tr>
-						<tr>
-							<td>详细地址<input type="text" name="address" /></td>
-						</tr>
-						<tr>
-							<td>楼盘名<input type="text" name="realEstateName" /></td>
-						</tr>
-						<tr>
-							<td>状态<input type="text" name="struts" /></td>
-						</tr>
-						<tr>
-							<td>联系信息<input type="text" name="contactInformation" /></td>
-						</tr>
-						<tr>
-							<td>周边<textarea rows="2" cols="2" name="periphery"
-									style="margin: 0px; width: 202px; height: 56px;"></textarea></td>
-						</tr>
+					</tr>
+					<tr>
+						<td>副标题<input type="text" name="subtitle" /></td>
+					</tr>
+					<tr>
+						<td>内容<input type="text" name="content" /></td>
+					</tr>
+					<tr>
+						<td>主图<input type="text" name="masterGraph" /></td>
+					</tr>
+					<tr>
+						<td>省<input type="text" name="province" /></td>
+					</tr>
+					<tr>
+						<td>城市<input type="text" name="city" /></td>
+					</tr>
+					<tr>
+						<td>详细地址<input type="text" name="address" /></td>
+					</tr>
+					<tr>
+						<td>楼盘名<input type="text" name="realEstateName" /></td>
+					</tr>
+					<tr>
+						<td>状态<input type="text" name="struts" /></td>
+					</tr>
+					<tr>
+						<td>联系信息<input type="text" name="contactInformation" /></td>
+					</tr>
+					<tr>
+						<td>周边<textarea rows="2" cols="2" name="periphery"
+								style="margin: 0px; width: 202px; height: 56px;"></textarea></td>
+					</tr>
+
+
 
 
 
 
 					</form>
-
-
 				</table></td>
-
+			<input type="submit" value="提交" />
 
 		</tr>
-		<tr>
 
+		<tr>
 			<td><table class="table">
 					<tr>
 						<td>房子类型<input type="text" name="typeOfHouse"
@@ -87,13 +87,14 @@
 						<td>面积<input type="text" name="flat" id="flat" /></td>
 						<td>库存<input type="text" name="Stock" id="Stock" /></td>
 					</tr>
-					<button class="button" onclick="addRow();">添加sku</button>
-				</table></td>
+
+				</table>
+				<button class="button" onclick="addRow();">添加sku</button></td>
 
 		</tr>
 
-		<button>表单提</button>
-		<input type="button" value="123" onclick="sbumit()"/>
+
+
 
 
 	</table>
@@ -103,38 +104,30 @@
 	var rowCount = 4;
 	function addRow() {
 		rowCount++;
-		var newRow = '<tr id="option' + rowCount + '"><td>房子类型<input type="text" name="typeOfHouse" /></td><td>价格<input type="text" name="price" /></td><td>面积<input type="text"  name="flat" /></td><td>库存<input type="text" name="Stock" /></td><td><a href="javascript:void(0)" onclick=delRow(' + rowCount + ')>删除</a></td></tr>';
+		var newRow = '<tr id="option' + rowCount + '"><td>房子类型<input type="text" name="typeOfHouse" /></td><td>价格<input type="text" name="price" /></td><td>面积<input type="text"  name="flat" /></td><td>库存<input type="text" name="Stock" /></td><td><a href="javascript:void(0)" onclick=delRow(' + rowCount + ',this)>删除</a></td></tr>';
 		$('.table').append(newRow);
 	}
 	//删除行  
-	function delRow(rowIndex) {
+	function delRow(rowIndex,obj) {
 		$("#option" + rowIndex).remove();
 		rowCount--;
 	}
 
 
 
-		$("button").click(function(){
-			 var title = $("[name=title]").val();
-			
-			 $("#form1").serialize()
-			$.ajax({
-				type : "post",
-				url : "<%=basePath%>adddo",
-				async : true,
-				data :{"title" : title },
-				success : function(data) {	
+	<%-- $("button").click(function() {
+		var title = $("[name=title]").val();
+		$.ajax({
+			type : "post",
+			url : "<%=basePath%>adddo",
+			async : true,
+			data : $("#form1").serialize(),
+			success : function(data) {
 
-					alert(data);
-				}
-			});
-			
+				console.info(data);
+			}
 		});
-		
-		function sbumit(){
-			
-			
-		}
-	
+
+	}); --%>
 </script>
 </html>

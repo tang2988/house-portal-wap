@@ -1,5 +1,7 @@
 package com.xxh.fang.Controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -88,11 +91,58 @@ public class ProductController {
 		return "cust/addProductAndSku";
 	}
 
-	@RequestMapping( value={"adddo"})
+	@RequestMapping(value = { "add.do" })
 	@ResponseBody
-	public String adddo(String title) {
-		/*ProductAndSkuBO product = new ProductAndSkuBO();
-		ResVo vo = productApiImpl.addProduct(product);*/
+	public String adddo(ProductVo productVo, HttpServletRequest req) {
+
+		List<SkuVo> skuList = new ArrayList<SkuVo>();
+		String[] typeOfHouseArray = req.getParameterValues("typeOfHouse");
+		String[] priceArray = req.getParameterValues("price");
+		String[] flat = req.getParameterValues("flat");
+		String[] Stock = req.getParameterValues("Stock");
+
+		for (int k = 0; k < typeOfHouseArray.length; k++) {
+
+			SkuVo skuvo = new SkuVo();
+			skuvo.setTypeOfHouse(typeOfHouseArray[k]);
+			skuvo.setPrice(new BigDecimal(priceArray[k]));
+			skuvo.setFlat(Integer.parseInt(flat[k]));
+			skuvo.setStock(Integer.parseInt(Stock[k]));
+			skuList.add(skuvo);
+		}
+
+		ProductAndSkuBO product = new ProductAndSkuBO();
+		product.setSkuList(skuList);
+		product.setProductVo(productVo);
+		ResVo b = productApiImpl.addProduct(product);
+		return b.getMsg();
+	}
+
+	@RequestMapping(value = { "updateProduct" })
+	@ResponseBody
+	public String updateProduct(ProductVo productVo, HttpServletRequest req) {
+
+		List<SkuVo> skuList = new ArrayList<SkuVo>();
+		String[] typeOfHouseArray = req.getParameterValues("typeOfHouse");
+		String[] priceArray = req.getParameterValues("price");
+		String[] flat = req.getParameterValues("flat");
+		String[] Stock = req.getParameterValues("Stock");
+
+		for (int k = 0; k < typeOfHouseArray.length; k++) {
+
+			SkuVo vo = new SkuVo();
+			//vo.setSkuid(skuid);
+			vo.setTypeOfHouse(typeOfHouseArray[k]);
+			vo.setPrice(new BigDecimal(priceArray[k]));
+			vo.setFlat(Integer.parseInt(flat[k]));
+			vo.setStock(Integer.parseInt(Stock[k]));
+			skuList.add(vo);
+		}
+
+		ProductAndSkuBO product = new ProductAndSkuBO();
+		product.setSkuList(skuList);
+		product.setProductVo(productVo);
+		ResVo b = productApiImpl.addProduct(product);
 		return "true";
 	}
 }
